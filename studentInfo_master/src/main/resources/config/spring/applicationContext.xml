@@ -26,12 +26,12 @@
 		<!-- 配置获取连接等待超时的实际 -->
 		<property name="maxWait" value="60000" />
 	</bean>
-	
-	
+
+
 	<!-- 配置写库 继承abstractDataSource-->
 	<bean id="dataSourceWrite" parent="abstractDataSource">
 		<!-- 基本url、username、password -->
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/ssm?serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;autoReconnect=true&amp;allowMultiQueries=true" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/studentInfo_manager?serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;autoReconnect=true&amp;allowMultiQueries=true" />
 		<property name="username" value="root" />
 		<property name="password" value="123456" />
 	</bean>
@@ -39,7 +39,7 @@
 	<!-- 配置读库 继承abstractDataSource-->
 	<bean id="dataSourceRead" parent="abstractDataSource">
 		<!-- 基本 url、username、password -->
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/ssm?serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;autoReconnect=true&amp;allowMultiQueries=true" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/studentInfo_manager?serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;autoReconnect=true&amp;allowMultiQueries=true" />
 		<property name="username" value="root" />
 		<property name="password" value="123456" />
 	</bean>

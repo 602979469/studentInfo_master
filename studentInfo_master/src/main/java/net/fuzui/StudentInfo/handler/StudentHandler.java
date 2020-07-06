@@ -9,11 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -106,7 +102,7 @@ public class StudentHandler {
 	}
 
 	// 查询
-	@RequestMapping(value = "/queryy/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/queryy/{pn}")
 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,
 			HttpServletRequest request, @PathVariable(value = "pn") String pn, Model model) {
 		int no = Integer.parseInt(pn);
@@ -169,7 +165,7 @@ public class StudentHandler {
 	}
 
 	// 查询,根据cid查询老师
-	@RequestMapping(value = "/selcou/{cid}", method = RequestMethod.GET)
+	@GetMapping(value = "/selcou/{cid}")
 	public String selCou(@PathVariable(value = "cid") String cid, Model model) {
 
 		// 代优化
@@ -241,7 +237,7 @@ public class StudentHandler {
 	}
 
 	// 学生查询本人选课
-	@RequestMapping(value = "/selcouresult/{sid}/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/selcouresult/{sid}/{pn}")
 	public String selcouresult(@PathVariable("sid") String sid, StuSelectResult ssr, HttpServletRequest request,
 			@PathVariable(value = "pn") String pn, Model model) {
 
@@ -255,7 +251,7 @@ public class StudentHandler {
 	}
 
 	// 所选课程列表详情-----退选
-	@RequestMapping(value = "/exitchoose/{sid}/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/exitchoose/{sid}/{pn}")
 	public String exitChoose(@PathVariable("sid") String sid, StuSelectResult ssr, HttpServletRequest request,
 			@PathVariable(value = "pn") String pn, Model model) {
 
@@ -269,7 +265,7 @@ public class StudentHandler {
 	}
 
 	// 退选
-	@RequestMapping(value = "/exitsel/{cid}/{sid}", method = RequestMethod.GET)
+	@GetMapping(value = "/exitsel/{cid}/{sid}")
 	public ModelAndView exitSel(@PathVariable("cid") String cid, @PathVariable("sid") String sid) {
 
 		if (selectCourseService.deleteSC(cid, sid) != 0) {
@@ -281,7 +277,7 @@ public class StudentHandler {
 	}
 
 	// 学生查询本人选课
-	@RequestMapping(value = "/endcourse/{sid}/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/endcourse/{sid}/{pn}")
 	public String endcourse(@PathVariable("sid") String sid, Grade grade, HttpServletRequest request,
 			@PathVariable(value = "pn") String pn, Model model) {
 

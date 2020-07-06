@@ -13,10 +13,6 @@
         <result column="introduction" property="introduction" />
     </resultMap>
 
-
-
-
-
     <!-- 添加教师信息 -->
     <insert id="insertTeacher" parameterType="Teacher">
 		insert into teacher(tid,tname,tpassword,tsex,introduction)

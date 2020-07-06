@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class AjaxHandler {
 	 * @param request
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/existCid",method = RequestMethod.POST)
+	@PostMapping(value="/existCid")
 	public void existCid(@RequestParam("cid") String cid,HttpServletResponse response,HttpServletRequest request) throws IOException{
 		System.out.println("课程编号="+cid);
  
@@ -63,7 +64,7 @@ public class AjaxHandler {
 		out.close();
 		
 	}
-	@RequestMapping(value="/existSid",method = RequestMethod.POST)
+	@PostMapping(value="/existSid")
 	public void existSid(@RequestParam("sid") String sid,HttpServletResponse response,HttpServletRequest request) throws IOException{
 		System.out.println("学号="+sid);
  
@@ -84,7 +85,7 @@ public class AjaxHandler {
 		
 	}
 	//ajax验证教师id
-	@RequestMapping(value="/existTid",method = RequestMethod.POST)
+	@PostMapping(value="/existTid")
 	public void existTid(@RequestParam("tid") String tid,HttpServletResponse response,HttpServletRequest request) throws IOException{
  
 		response.setContentType("text/html;charset=UTF-8");
@@ -105,7 +106,7 @@ public class AjaxHandler {
 	}
 
 	
-	@RequestMapping(value="/existTime",method = RequestMethod.POST)
+	@PostMapping(value="/existTime")
 	public void existTime(@RequestParam("coursetime") String coursetime,@RequestParam("courseweek") String courseweek,
 			@RequestParam("classroom") String classroom,HttpServletResponse response,HttpServletRequest request) throws IOException{
  

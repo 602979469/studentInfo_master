@@ -1,5 +1,8 @@
 package net.fuzui.StudentInfo.pojo;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.pojo
@@ -12,6 +15,9 @@ package net.fuzui.StudentInfo.pojo;
  * @UpdateRemark: 新建
  * @Version: 1.0
  */
+
+@Data
+@NoArgsConstructor
 public class SC implements java.io.Serializable {
     /**
      *  序列化
@@ -23,43 +29,6 @@ public class SC implements java.io.Serializable {
     private String sid;
     //课程编号
     private String cid;
-
-    /**
-     * 默认构造方法
-     */
-    public SC() {
-
-    }
-
-    /**
-     *  置取方法
-     */
-    public Integer getId() {
-        return id;
-    }
-
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
-
 
 }
 

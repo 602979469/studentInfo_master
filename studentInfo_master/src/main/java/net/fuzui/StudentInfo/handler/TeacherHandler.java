@@ -9,12 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -141,7 +136,7 @@ public class TeacherHandler {
 
 	}
 
-	@RequestMapping(value = "/sercsc/{tid}/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/sercsc/{tid}/{pn}")
 	public String sercChoose(@PathVariable("tid") String tid, StuSelectResult ssr, Model model, HttpSession httpSession,
 			@PathVariable(value = "pn") String pn) {
 
@@ -158,7 +153,7 @@ public class TeacherHandler {
 	}
 
 	// 查询
-	@RequestMapping(value = "/looksel/{cid}/{cname}/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/looksel/{cid}/{cname}/{pn}")
 	public String lookChoose(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
 			HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
@@ -177,7 +172,7 @@ public class TeacherHandler {
 	}
 
 	// 结课查询页
-	@RequestMapping(value = "/endcou/{cid}/{cname}/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/endcou/{cid}/{cname}/{pn}")
 	public String endCourse(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
 			HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
@@ -197,9 +192,9 @@ public class TeacherHandler {
 	
 	
 	// 结课成绩查询页
-		@RequestMapping(value = "/endcougrade/{cid}/{cname}/{pn}", method = RequestMethod.GET)
-		public String endCourseGrade(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
-				HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
+	@GetMapping(value = "/endcougrade/{cid}/{cname}/{pn}")
+	public String endCourseGrade(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
+			HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
 			int no = Integer.parseInt(pn);
 			PageHelper.startPage(no, 5);
@@ -215,7 +210,7 @@ public class TeacherHandler {
 		}
 
 	// 添加成绩
-	@RequestMapping(value = "/addGrade", method = RequestMethod.POST)
+	@PostMapping(value = "/addGrade")
 	public String addGrade(@RequestParam("cid") String cid, @RequestParam("sid") String sid,
 			@RequestParam("grade") Integer grade, Model model, HttpServletRequest request) {
 

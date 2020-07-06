@@ -13,11 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -104,13 +100,15 @@ public class AdminHandler {
 				}
 		};
 
- // 添加
+	/**
+	 * 添加学生
+	 * @param student 学生对象
+	 * @param model
+	 * @return
+	 */
  	@RequestMapping("/addStudent")
  	public String addStudent(Student student, Model model) {
- 		
- 		
- 		
- 		
+
  		int col = Integer.parseInt(student.getCollege());
  		int pro = Integer.parseInt(student.getProfession());
  		int cla = Integer.parseInt(student.getClassr());
@@ -118,9 +116,7 @@ public class AdminHandler {
  		student.setCollege(arr_belongcoll[pro]);
  		student.setProfession(arr_belongpro[pro][col]);
  		student.setClassr(arr_belongcla[pro][col][cla]);
- 		
- 		
- 		
+
  		if (studentService.insertStudent(student) != 0) {
  			model.addAttribute("student", student);
  			return "success";
@@ -130,12 +126,16 @@ public class AdminHandler {
  		}
 
  	}
- 	//查询全部学生方法
+
+	/**
+	 * 查询全部学生，默认是每页显示十个学生
+	 *
+	 * @param request
+	 */
  	public void queryStu(HttpServletRequest request) {
  		List<Student> studentList = new ArrayList<Student>();
  		studentList = studentService.selectStudentBySql(1,10);
- 		
- 		
+
  		request.setAttribute("slist", studentList);
  	}
 
@@ -145,7 +145,7 @@ public class AdminHandler {
  	}
  	
  	// 查询
- 	@RequestMapping(value = "/query/{pn}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/query/{pn}")
  	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,HttpServletRequest request,
  			@PathVariable(value = "pn") String pn,Model model) {
 
@@ -157,16 +157,7 @@ public class AdminHandler {
 		request.setAttribute("condition", condition);
  		//查询全部
  		if (serc.equals("all")) {
- 			
- 			
- 			
- 	 		
- 			System.out.println("------------------------------------------------------------------------------------------------");
-// 			studentList = studentService.selectStudentBySql(1,10);
-// 			//model.addAttribute("studentList", studentList);
-// 			request.setAttribute("slist", studentList);
-// 			System.out.println("00000"+request.getAttribute("slist"));
-// 			System.out.println(studentList);
+
  			studentList = studentService.selectStudentBySql(1,10);
  			pageIn(model, studentList);
  	 		request.setAttribute("slist", studentList);
@@ -174,7 +165,6 @@ public class AdminHandler {
 
  		//根据学号查询
  		} else if (serc.equals("sid")) {
-
  			studentList = studentService.getByStudentSid(1,10,condition);
  			pageIn(model, studentList);
  			request.setAttribute("slist", studentList);
@@ -214,11 +204,6 @@ public class AdminHandler {
 
  		} else {
 
-// 			studentList = studentService.selectStudentBySql(1,10);
-// 			model.addAttribute("studentList", studentList);
-// 			request.setAttribute("slist", studentList);
-// 			System.out.println("00000"+request.getAttribute("slist"));
-// 			System.out.println(studentList);
  			studentList = studentService.selectStudentBySql(1,10);
  			pageIn(model, studentList);
  	 		request.setAttribute("slist", studentList);
@@ -229,7 +214,7 @@ public class AdminHandler {
  	}
 
  	// 删除学生
- 	@RequestMapping(value = "/delete/{sid}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/delete/{sid}")
  	public String deleteStudent(@PathVariable(value = "sid") String sid, Model model) {
 
 
@@ -245,14 +230,14 @@ public class AdminHandler {
  	}
 
  	// 跳转页面
- 	@RequestMapping(value = "/finalPage", method = RequestMethod.GET)
+ 	@GetMapping(value = "/finalPage")
  	public String finalPage(HttpServletRequest request) {
  		queryStu(request);
  		return "admin/queryStudent";
  	}
 
  	// 修改定位
- 	@RequestMapping(value = "/moditystu/{sid}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/moditystu/{sid}")
  	public String editPre(@PathVariable("sid") String sid, HttpServletRequest request) {
 
  		List<Student> studentList = new ArrayList<Student>();
@@ -266,7 +251,7 @@ public class AdminHandler {
  	
  	
  	// 修改
- 	@RequestMapping(value = "/moditystud/{sid}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/moditystud/{sid}")
  	public String update(@PathVariable("sid") String sid, Student student, HttpServletRequest request) {
 
  		int col = Integer.parseInt(student.getCollege());
@@ -317,56 +302,63 @@ public class AdminHandler {
  	}
 
 
- 	// 跳转页面
+	/**
+	 * 跳转到添加学生的界面
+	 * @return
+	 */
  	@RequestMapping("/addstu")
- 	public String adStudent() {
+ 	public String addStudent() {
  		return "admin/addStudent";
  	}
 
- 	// 跳转页面
+	/**
+	 * 跳转到添加老师的界面
+	 * @return
+	 */
  	@RequestMapping("/addtea")
- 	public String adTeacher() {
+ 	public String addTeacher() {
  		return "admin/addTeacher";
  	}
 
- 	// 跳转页面
+	/**
+	 * 跳转到添加学生的界面
+	 * @return
+	 */
  	@RequestMapping("/addcou")
- 	public String adCourse() {
+ 	public String addCourse() {
  		return "admin/addCourse";
  	}
- 	
- // 添加
+
+	/**
+	 * 添加教师
+	 * @param teacher
+	 * @param model
+	 * @param httpSession
+	 * @return
+	 */
  	@RequestMapping("/addTeacher")
  	public String addTeacher(Teacher teacher, Model model, HttpSession httpSession) {
 
  		if (teacherService.insertTeacher(teacher) != 0) {
- 			model.addAttribute("teacher", teacher);
-
- 			//---------------------------------待优化-----同样不能实时刷新--------------------------------------------
  			return "success";
- 			//return new ModelAndView(new RedirectView("/StudentInfo/TeacherHandler/finalPage"));
- 			// return "techer/teacherFace";
  		} else {
  			return "fail";
- 			//return new ModelAndView(new RedirectView("fail"));
  		}
-
  	}
 
- 	
- 	/**
- 	 * 教师相关
- 	 */
- 	
- 	//查询全部教师方法
- 	 	public void queryTea(HttpServletRequest request) {
+
+	/**
+	 * 查询全部教师
+	 * @param request
+	 */
+	public void queryTea(HttpServletRequest request) {
  	 		List<Teacher> teacherList = new ArrayList<Teacher>();
  	 		teacherList = teacherService.selectTeacherBySql(1,10);
  	 		request.setAttribute("teacherList", teacherList);
  	 	}
  	
  	// 查询
- 	@RequestMapping(value = "/queryTea/{pn}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/queryTea/{pn}")
  	public String redirectTea(@RequestParam("serc") String serc, @RequestParam("condition") String condition,HttpServletRequest request,
  			@PathVariable(value = "pn") String pn,Model model) {
  		int no = Integer.parseInt(pn);
@@ -405,7 +397,7 @@ public class AdminHandler {
  	
 
  	//删除教师
- 	@RequestMapping(value = "/deleteTea/{tid}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/deleteTea/{tid}")
  	public String deleteTeacher(@PathVariable(value = "tid") String tid, Model model) {
 
 
@@ -421,14 +413,14 @@ public class AdminHandler {
 
  	}
 
- 	@RequestMapping(value = "/finalPageTea", method = RequestMethod.GET)
+ 	@GetMapping(value = "/finalPageTea")
  	public String finalPageTea(HttpServletRequest request) {
  		queryTea(request);
  		return "admin/queryTeacher";
  	}
 
  	//修改定位，可优化
- 	@RequestMapping(value = "/modityTea/{tid}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/modityTea/{tid}")
  	public String editPreTea(@PathVariable("tid") String tid, HttpServletRequest request) {
 
  		List<Teacher> teacherList = new ArrayList<Teacher>();
@@ -440,7 +432,7 @@ public class AdminHandler {
  	}
 
  	// 修改
- 	@RequestMapping(value = "/modityTeac/{tid}", method = RequestMethod.GET)
+ 	@GetMapping(value = "/modityTeac/{tid}")
  	public String update(@PathVariable("tid") String tid, Teacher teacher, HttpServletRequest request) {
 
  		if (teacherService.modifyTeacher(teacher) != 0) {

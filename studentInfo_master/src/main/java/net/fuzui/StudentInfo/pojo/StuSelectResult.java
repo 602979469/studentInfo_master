@@ -1,5 +1,7 @@
 package net.fuzui.StudentInfo.pojo;
 
+import lombok.Data;
+
 /**
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.pojo
@@ -12,6 +14,7 @@ package net.fuzui.StudentInfo.pojo;
  * @UpdateRemark: 新建
  * @Version: 1.0
  */
+@Data
 public class StuSelectResult implements java.io.Serializable{
     /**
      *  序列化
@@ -34,57 +37,6 @@ public class StuSelectResult implements java.io.Serializable{
     //任课教师姓名
     private String tname;
 
-    /**
-     *  置取方法
-     */
-    public String getClassr() {
-        return classr;
-    }
-    public void setClassr(String classr) {
-        this.classr = classr;
-    }
-    public String getCoursetime() {
-        return coursetime;
-    }
-    public void setCoursetime(String coursetime) {
-        this.coursetime = coursetime;
-    }
-    public String getCourseweek() {
-        return courseweek;
-    }
-    public void setCourseweek(String courseweek) {
-        this.courseweek = courseweek;
-    }
-    public String getCname() {
-        return cname;
-    }
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
-    public String getClassroom() {
-        return classroom;
-    }
-    public void setClassroom(String classroom) {
-        this.classroom = classroom;
-    }
-    public String getCredits() {
-        return credits;
-    }
-    public void setCredits(String credits) {
-        this.credits = credits;
-    }
-    public String getPeriod() {
-        return period;
-    }
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-    public String getTname() {
-        return tname;
-    }
-    public void setTname(String tname) {
-        this.tname = tname;
-    }
 
 
 }

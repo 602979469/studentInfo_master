@@ -163,14 +163,14 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <!-- jstl -->
-
-
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
     </dependency>
-
-
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
     <!-- mongodb 
     <dependency>
       <groupId>org.springframework.data</groupId>

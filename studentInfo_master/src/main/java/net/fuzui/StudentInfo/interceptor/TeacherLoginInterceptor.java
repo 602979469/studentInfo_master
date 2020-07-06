@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 
+ *
+ * 登录拦截器，会拦截任何"/TeacherHandler/**"，“/teacher/**”，"/CoursePlanHandler/**"的请求
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.interceptor
  * @ClassName: TeacherLoginInterceptor
@@ -19,8 +21,16 @@ import org.springframework.web.servlet.ModelAndView;
  * @UpdateRemark: 新建
  * @Version: 1.0
  */
-public class TeacherLoginInterceptor implements HandlerInterceptor {
+public class TeacherLoginInterceptor extends HandlerInterceptorAdapter {
 
+    /**
+     * 当拦截器执行时，如果在session域中没有找到tid，说明没有教师登录过系统，跳转到登录界面
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -35,22 +45,4 @@ public class TeacherLoginInterceptor implements HandlerInterceptor {
         return true;
 	}
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("postHandle");
-		
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("afterCompletion");
-		
-	}
-
-	
-	
 }

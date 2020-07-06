@@ -1,5 +1,8 @@
 package net.fuzui.StudentInfo.pojo;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.pojo
@@ -12,6 +15,8 @@ package net.fuzui.StudentInfo.pojo;
  * @UpdateRemark: 新建
  * @Version: 1.0
  */
+@Data
+@NoArgsConstructor
 public class Course implements java.io.Serializable{
     /**
      *  序列化
@@ -29,54 +34,6 @@ public class Course implements java.io.Serializable{
     private String belongcoll;
     //所属专业
     private String belongpro;
-
-    /**
-     * 默认构造方法
-     */
-    public Course() {
-
-    }
-
-    /**
-     *  置取方法
-     */
-    public String getCid() {
-        return cid;
-    }
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
-    public String getCname() {
-        return cname;
-    }
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
-    public String getCintroduction() {
-        return cintroduction;
-    }
-    public void setCintroduction(String cintroduction) {
-        this.cintroduction = cintroduction;
-    }
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public String getBelongcoll() {
-        return belongcoll;
-    }
-    public void setBelongcoll(String belongcoll) {
-        this.belongcoll = belongcoll;
-    }
-    public String getBelongpro() {
-        return belongpro;
-    }
-    public void setBelongpro(String belongpro) {
-        this.belongpro = belongpro;
-    }
-
 
 }
 

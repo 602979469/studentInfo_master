@@ -9,11 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -67,7 +63,7 @@ public class CourseHandler {
 	}
 
 	// 查询课程
-	@RequestMapping(value = "/query/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/query/{pn}")
 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,
 			HttpServletRequest request,@PathVariable(value = "pn") String pn,Model model) {
 
@@ -132,7 +128,7 @@ public class CourseHandler {
 	}
 
 	//删除学生
-	@RequestMapping(value = "/delete/{cid}", method = RequestMethod.GET)
+	@GetMapping(value = "/delete/{cid}")
 	public String deleteStudent(@PathVariable(value = "cid") String cid, HttpServletRequest request) {
 
 
@@ -148,7 +144,7 @@ public class CourseHandler {
 	}
 
 	//跳转到queryCourse页面
-	@RequestMapping(value = "/finalPage", method = RequestMethod.GET)
+	@GetMapping(value = "/finalPage")
 	public String finalPage(HttpSession httpSession,HttpServletRequest request) {
 		Object admin = request.getSession().getAttribute("courseList");
  		System.out.println(admin+"111111111111111111111111111111111111111111111111111111111111111111111111111");
@@ -161,7 +157,7 @@ public class CourseHandler {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/moditystu/{cid}", method = RequestMethod.GET)
+	@GetMapping(value = "/moditystu/{cid}")
 	public String editPre(@PathVariable("cid") String cid, HttpServletRequest request) {
 
 		
@@ -173,7 +169,7 @@ public class CourseHandler {
 	}
 
 	//修改课程信息
-	@RequestMapping(value = "/moditystud/{cid}", method = RequestMethod.GET)
+	@GetMapping(value = "/moditystud/{cid}")
 	public String update(@PathVariable("cid") String cid, Course course, Model model) {
 		
 		if (courseService.modifyCourse(course) != 0) {

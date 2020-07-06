@@ -9,10 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -66,7 +63,7 @@ public class CoursePlanHandler {
 	}
 
 	//查询课程方案
-	@RequestMapping(value = "/querycouplan/{cid}", method = RequestMethod.GET)
+	@GetMapping(value = "/querycouplan/{cid}")
 	public String deleteStudent(@PathVariable(value = "cid") String cid, Model model, HttpSession session, HttpServletRequest request) {
 		
 		if(coursePlanService.existsCoursePlan(cid) != null) {
@@ -98,7 +95,7 @@ public class CoursePlanHandler {
  	}
 	
 	//查询所有课程方案
-	@RequestMapping(value = "/queryy/{pn}", method = RequestMethod.GET)
+	@GetMapping(value = "/queryy/{pn}")
 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,
 			Model model, HttpSession httpSession,@PathVariable(value = "pn") String pn,HttpServletRequest request) {
 

@@ -1,4 +1,8 @@
 package net.fuzui.StudentInfo.pojo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
 * @ProjectName:	StudentInfo
 * @Package: net.fuzui.StudentInfo.pojo
@@ -12,6 +16,9 @@ package net.fuzui.StudentInfo.pojo;
 * @Version: 1.0
  */
 
+
+@NoArgsConstructor
+@Data
 public class Student implements java.io.Serializable{
 
 	//序列化
@@ -34,71 +41,5 @@ public class Student implements java.io.Serializable{
 	private String profession;
 	//学院
 	private String college;
-	
-	/**
-	 *	默认构造方法
-	 * */
-	public Student() {
-		
-	}
-	
-	
-	/**
-	 * 置取方法
-	 * */
-	public String getSid() {
-		return sid;
-	}
-	public void setSid(String sid) {
-		this.sid = sid;
-	}
-	public String getSname() {
-		return sname;
-	}
-	public void setSname(String sname) {
-		this.sname = sname;
-	}
-	public String getSidcard() {
-		return sidcard;
-	}
-	public void setSidcard(String sidcard) {
-		this.sidcard = sidcard;
-	}
-	public String getSsex() {
-		return ssex;
-	}
-	public void setSsex(String ssex) {
-		this.ssex = ssex;
-	}
-	public String getSpassword() {
-		return spassword;
-	}
-	public void setSpassword(String spassword) {
-		this.spassword = spassword;
-	}
-	public String getSage() {
-		return sage;
-	}
-	public void setSage(String sage) {
-		this.sage = sage;
-	}
-	public String getClassr() {
-		return classr;
-	}
-	public void setClassr(String classr) {
-		this.classr = classr;
-	}
-	public String getProfession() {
-		return profession;
-	}
-	public void setProfession(String profession) {
-		this.profession = profession;
-	}
-	public String getCollege() {
-		return college;
-	}
-	public void setCollege(String college) {
-		this.college = college;
-	}
-	
+
 }

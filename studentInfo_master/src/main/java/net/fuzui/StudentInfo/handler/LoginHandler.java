@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 	负责处理登录请求的处理器，分别包含教师，学生，管理员的登录和登出请求
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.handler
  * @ClassName: AdminHandler
@@ -47,9 +48,15 @@ public class LoginHandler {
 	StudentService studentService;
     @Autowired
 	TeacherService teacherService;
-    
-  //管理员登录
 
+	/**
+	 * 处理管理员登录请求，如果账号密码吻合，会将用户名以 key为“aname”，value为用户名的键值对存入session中
+	 * @param aname 账号用户名
+	 * @param apassword 账号密码
+	 * @param model model
+	 * @param httpSession session
+	 * @return
+	 */
     @RequestMapping("/adminlogin")
     public String loginStudent(@RequestParam("aname") String aname, @RequestParam("apassword") String apassword,
                                Model model, HttpSession httpSession) {
@@ -65,17 +72,29 @@ public class LoginHandler {
 
     }
 
-    // 管理员退出登录
-    @RequestMapping("/adminlogout")
+	/**
+	 * 处理管理员的登出请求，将session中的key为“aname”和“couList”的键值对移除，并且跳转回登录界面
+	 * @param httpSession session
+	 * @return
+	 */
+	@RequestMapping("/adminlogout")
     public ModelAndView adminLogout(HttpSession httpSession) {
         httpSession.removeAttribute("aname");
         httpSession.removeAttribute("couList");
         return new ModelAndView(new RedirectView("/StudentInfo/index.jsp"));
     }
-    
-    
- // 学生登录
- 	@RequestMapping("/studentlogin")
+
+
+	/**
+	 * 处理学生的登录请求，如果账号密码吻合，会将用户名以 key为“sid”，value为学生的sid属性的属性值，key为“sname” value为学生的”sname“属性的属性值的键值对存入session中
+	 * @param sid 学生的sid属性
+	 * @param spassword 学生的spassword属性
+	 * @param model model
+	 * @param httpSession session
+	 * @param httpRequest request
+	 * @return
+	 */
+	@RequestMapping("/studentlogin")
  	public ModelAndView loginStudent(@RequestParam("sid") String sid, @RequestParam("spassword") String spassword,
  			Model model, HttpSession httpSession, HttpServletRequest httpRequest) {
 
@@ -91,8 +110,12 @@ public class LoginHandler {
  		}
 
  	}
- 	
- // 学生退出登录
+
+	/**
+	 * 处理学生的登出请求，移除session中key为“sid”，“sname”，“courseList”，“ssrList”，“sesList”的属性值
+	 * @param httpSession session
+	 * @return
+	 */
  	@RequestMapping("/studentlogout")
  	public ModelAndView studentLogout(HttpSession httpSession) {
 
@@ -103,11 +126,17 @@ public class LoginHandler {
  		httpSession.removeAttribute("sesList");
  		return new ModelAndView(new RedirectView("/StudentInfo/index.jsp"));
  	}
-    
- 	
- 	
- // 教师登录
- 	@RequestMapping("/teacherlogin")
+
+
+	/**
+	 * 处理教师的登录请求，会将用户名以 key为“tid”，value为教师的tid属性的属性值，key为“sname” ，value为 学生的“sname”姓名属性的属性值的键值对存入session中
+	 * @param tid
+	 * @param tpassword
+	 * @param model
+	 * @param httpSession
+	 * @return
+	 */
+	@RequestMapping("/teacherlogin")
  	public ModelAndView loginTeacher(@RequestParam("tid") String tid, @RequestParam("tpassword") String tpassword,
  			Model model, HttpSession httpSession) {
 
@@ -126,8 +155,12 @@ public class LoginHandler {
  		}
 
  	}
- 	
- // 教师退出登录
+
+	/**
+	 * 处理教师的登出请求，移除session中key为“tid”，“tname”，“courseList”，“sesList”，“lookList”的属性值
+	 * @param httpSession
+	 * @return
+	 */
  	@RequestMapping("/teacherlogout")
  	public ModelAndView teacherLogout(HttpSession httpSession) {
 
@@ -136,7 +169,6 @@ public class LoginHandler {
  		httpSession.removeAttribute("couList");
  		httpSession.removeAttribute("sesList");
  		httpSession.removeAttribute("lookList");
-
  		return new ModelAndView(new RedirectView("/StudentInfo/index.jsp"));
  	}
 }

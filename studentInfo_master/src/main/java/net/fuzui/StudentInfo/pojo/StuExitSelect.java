@@ -1,5 +1,7 @@
 package net.fuzui.StudentInfo.pojo;
 
+import lombok.Data;
+
 /**
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.pojo
@@ -12,6 +14,8 @@ package net.fuzui.StudentInfo.pojo;
  * @UpdateRemark: 新建
  * @Version: 1.0
  */
+
+@Data
 public class StuExitSelect implements java.io.Serializable {
 
 
@@ -29,36 +33,7 @@ public class StuExitSelect implements java.io.Serializable {
     private Integer totalNum;
     //学生总数
     private Integer stuSum;
-    public String getCid() {
-        return cid;
-    }
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
-    public String getCname() {
-        return Cname;
-    }
-    public void setCname(String cname) {
-        Cname = cname;
-    }
-    public String getSid() {
-        return sid;
-    }
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-    public void setStuSum(Integer stuSum) {
-        this.stuSum = stuSum;
-    }
-    public Integer getStuSum() {
-        return this.stuSum;
-    }
-    public void setTotalNum(Integer totalNum) {
-        this.totalNum = totalNum;
-    }
-    public Integer getTotalNum() {
-        return this.totalNum;
-    }
+
 
 }
 
