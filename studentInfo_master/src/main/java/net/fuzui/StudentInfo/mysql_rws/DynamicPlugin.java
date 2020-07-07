@@ -1,9 +1,5 @@
 package net.fuzui.StudentInfo.mysql_rws;
 
-import java.util.Map;
-import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.keygen.SelectKeyGenerator;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -11,26 +7,31 @@ import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.slf4j.Logger;
+
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author fuzui
  * @date 2019年3月17日 下午5:58:43
  * 
  */
+
 /**
  *  Mybatis插件，通过拦截Executor方式实现
  * */
 @Intercepts({
-	@Signature(type = Executor.class,method = "update",args = { MappedStatement.class,Object.class}),
-	@Signature(type = Executor.class,method = "query",args = {MappedStatement.class,Object.class,RowBounds.class,ResultHandler.class})
+	@Signature(type = Executor.class,method = "update",args = { MappedStatement.class, Object.class}),
+	@Signature(type = Executor.class,method = "query",args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
 })
 public class DynamicPlugin implements Interceptor {
 	
 	private Logger log = LoggerFactory.getLogger(DynamicPlugin.class);
-	private static final Map<String,DynamicDataSourceGlobal> cacheMap = new ConcurrentHashMap<>();
+	private static final Map<String, DynamicDataSourceGlobal> cacheMap = new ConcurrentHashMap<>();
 	
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {

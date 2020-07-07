@@ -1,11 +1,9 @@
 package net.fuzui.StudentInfo.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import net.fuzui.StudentInfo.pojo.*;
+import net.fuzui.StudentInfo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,23 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import net.fuzui.StudentInfo.pojo.Course;
-import net.fuzui.StudentInfo.pojo.CourseGrade;
-import net.fuzui.StudentInfo.pojo.CoursePlan;
-import net.fuzui.StudentInfo.pojo.Grade;
-import net.fuzui.StudentInfo.pojo.StuExitSelect;
-import net.fuzui.StudentInfo.pojo.StuSelectResult;
-import net.fuzui.StudentInfo.pojo.Student;
-import net.fuzui.StudentInfo.pojo.Teacher;
-import net.fuzui.StudentInfo.service.CoursePlanService;
-import net.fuzui.StudentInfo.service.CourseService;
-import net.fuzui.StudentInfo.service.GradeService;
-import net.fuzui.StudentInfo.service.SelectCourseService;
-import net.fuzui.StudentInfo.service.StudentService;
-import net.fuzui.StudentInfo.service.TeacherService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fuzui
@@ -46,13 +31,13 @@ public class TeacherHandler {
 	@Autowired
 	TeacherService teacherService;
 	@Autowired
-	CoursePlanService coursePlanService;
+    CoursePlanService coursePlanService;
 	@Autowired
 	CourseService courseService;
 	@Autowired
-	SelectCourseService selectCourseService;
+    SelectCourseService selectCourseService;
 	@Autowired
-	GradeService gradeService;
+    GradeService gradeService;
 
 	// 添加
 	@RequestMapping("/addcou")
@@ -90,7 +75,7 @@ public class TeacherHandler {
 
 	@RequestMapping("/managecou/{tid}/{pn}")
 	public String manageCou(@PathVariable(value = "tid") String tid, Model model, HttpSession httpSession,
-			@PathVariable(value = "pn") String pn) {
+                            @PathVariable(value = "pn") String pn) {
 		// Course course = new Course();
 		// CoursePlan coursePlan = new CoursePlan();
 		int no = Integer.parseInt(pn);
@@ -127,7 +112,7 @@ public class TeacherHandler {
 
 	@RequestMapping("/moditypassword/{tid}")
 	public ModelAndView teacherModiPw(@PathVariable(value = "tid") String tid,
-			@RequestParam("tpassword") String tpassword, Model model) {
+                                      @RequestParam("tpassword") String tpassword, Model model) {
 		if (teacherService.modifyTeacherPwd(tpassword, tid) != 0) {
 			return new ModelAndView(new RedirectView("../queryvita/{tid}"));
 		} else {
@@ -138,7 +123,7 @@ public class TeacherHandler {
 
 	@GetMapping(value = "/sercsc/{tid}/{pn}")
 	public String sercChoose(@PathVariable("tid") String tid, StuSelectResult ssr, Model model, HttpSession httpSession,
-			@PathVariable(value = "pn") String pn) {
+                             @PathVariable(value = "pn") String pn) {
 
 		int no = Integer.parseInt(pn);
 		PageHelper.startPage(no, 5);
@@ -155,7 +140,7 @@ public class TeacherHandler {
 	// 查询
 	@GetMapping(value = "/looksel/{cid}/{cname}/{pn}")
 	public String lookChoose(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
-			HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
+                             HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
 		int no = Integer.parseInt(pn);
 		PageHelper.startPage(no, 5);
@@ -174,7 +159,7 @@ public class TeacherHandler {
 	// 结课查询页
 	@GetMapping(value = "/endcou/{cid}/{cname}/{pn}")
 	public String endCourse(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
-			HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
+                            HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
 		int no = Integer.parseInt(pn);
 		PageHelper.startPage(no, 5);
@@ -194,7 +179,7 @@ public class TeacherHandler {
 	// 结课成绩查询页
 	@GetMapping(value = "/endcougrade/{cid}/{cname}/{pn}")
 	public String endCourseGrade(@PathVariable("cid") String cid, @PathVariable("cname") String cname, Model model,
-			HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
+                                 HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
 			int no = Integer.parseInt(pn);
 			PageHelper.startPage(no, 5);
@@ -212,7 +197,7 @@ public class TeacherHandler {
 	// 添加成绩
 	@PostMapping(value = "/addGrade")
 	public String addGrade(@RequestParam("cid") String cid, @RequestParam("sid") String sid,
-			@RequestParam("grade") Integer grade, Model model, HttpServletRequest request) {
+                           @RequestParam("grade") Integer grade, Model model, HttpServletRequest request) {
 
 
 		Grade g = new Grade();

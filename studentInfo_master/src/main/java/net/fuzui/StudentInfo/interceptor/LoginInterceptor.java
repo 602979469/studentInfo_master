@@ -1,11 +1,10 @@
 package net.fuzui.StudentInfo.interceptor;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
  * 登录拦截器，会拦截任何"/AdminHandler/**"，“/CourseHandler/**”，"/admin/**"的请求
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @UpdateRemark: 新建
  * @Version: 1.0
  */
+@Configuration
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     /**

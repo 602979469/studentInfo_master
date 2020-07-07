@@ -2,10 +2,8 @@ package net.fuzui.StudentInfo.service;
 
 import net.fuzui.StudentInfo.pojo.CourseGrade;
 import net.fuzui.StudentInfo.pojo.CoursePlan;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ProjectName: StudentInfo

@@ -113,7 +113,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
      * @return  查询结果
      */
     @Override
-    public List<Student> getByStudentSid(int pageNo, int pageSize,String sid) {
+    public List<Student> getByStudentSid(int pageNo, int pageSize, String sid) {
         Map<String,Object> data = new HashMap<String,Object>();
         data.put("pageNo",(pageNo-1) * pageSize);
         data.put("pageSize",pageSize);
@@ -128,7 +128,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
      * @return 结果
      */
     @Override
-    public List<Student> getByStudentCol(int pageNo, int pageSize,String college) {
+    public List<Student> getByStudentCol(int pageNo, int pageSize, String college) {
         Map<String,Object> data = new HashMap<String,Object>();
         data.put("pageNo",(pageNo-1) * pageSize);
         data.put("pageSize",pageSize);
@@ -143,7 +143,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
      * @return  结果
      */
     @Override
-    public List<Student> getByStudentPro(int pageNo, int pageSize,String profession) {
+    public List<Student> getByStudentPro(int pageNo, int pageSize, String profession) {
         Map<String,Object> data = new HashMap<String,Object>();
         data.put("pageNo",(pageNo-1) * pageSize);
         data.put("pageSize",pageSize);
@@ -158,7 +158,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
      * @return  结果
      */
     @Override
-    public List<Student> getByStudentCla(int pageNo, int pageSize,String classr) {
+    public List<Student> getByStudentCla(int pageNo, int pageSize, String classr) {
         Map<String,Object> data = new HashMap<String,Object>();
         data.put("pageNo",(pageNo-1) * pageSize);
         data.put("pageSize",pageSize);

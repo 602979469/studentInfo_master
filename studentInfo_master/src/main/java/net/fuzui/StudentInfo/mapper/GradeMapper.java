@@ -1,9 +1,9 @@
 package net.fuzui.StudentInfo.mapper;
 
+import net.fuzui.StudentInfo.pojo.Grade;
+
 import java.util.List;
 import java.util.Map;
-
-import net.fuzui.StudentInfo.pojo.Grade;
 
 public interface GradeMapper {
 	 /**

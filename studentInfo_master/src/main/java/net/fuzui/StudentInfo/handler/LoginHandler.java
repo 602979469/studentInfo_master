@@ -3,24 +3,15 @@ package net.fuzui.StudentInfo.handler;
 import net.fuzui.StudentInfo.pojo.Student;
 import net.fuzui.StudentInfo.pojo.Teacher;
 import net.fuzui.StudentInfo.service.AdminService;
-import net.fuzui.StudentInfo.service.CoursePlanService;
-import net.fuzui.StudentInfo.service.CourseService;
-import net.fuzui.StudentInfo.service.SelectCourseService;
 import net.fuzui.StudentInfo.service.StudentService;
 import net.fuzui.StudentInfo.service.TeacherService;
-import net.fuzui.StudentInfo.service.impl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -96,7 +87,7 @@ public class LoginHandler {
 	 */
 	@RequestMapping("/studentlogin")
  	public ModelAndView loginStudent(@RequestParam("sid") String sid, @RequestParam("spassword") String spassword,
- 			Model model, HttpSession httpSession, HttpServletRequest httpRequest) {
+                                     Model model, HttpSession httpSession, HttpServletRequest httpRequest) {
 
  		Student student = new Student();
  		student = studentService.getByStuSid(sid);
@@ -138,7 +129,7 @@ public class LoginHandler {
 	 */
 	@RequestMapping("/teacherlogin")
  	public ModelAndView loginTeacher(@RequestParam("tid") String tid, @RequestParam("tpassword") String tpassword,
- 			Model model, HttpSession httpSession) {
+                                     Model model, HttpSession httpSession) {
 
  		if (teacherService.queryByNamePwd(tid, tpassword) != null) {
 

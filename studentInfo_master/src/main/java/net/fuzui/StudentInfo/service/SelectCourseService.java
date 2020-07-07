@@ -4,10 +4,8 @@ import net.fuzui.StudentInfo.pojo.SC;
 import net.fuzui.StudentInfo.pojo.StuExitSelect;
 import net.fuzui.StudentInfo.pojo.StuSelectResult;
 import net.fuzui.StudentInfo.pojo.Student;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ProjectName: StudentInfo

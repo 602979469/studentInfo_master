@@ -1,7 +1,6 @@
 package net.fuzui.StudentInfo.service;
 
 import net.fuzui.StudentInfo.pojo.Student;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

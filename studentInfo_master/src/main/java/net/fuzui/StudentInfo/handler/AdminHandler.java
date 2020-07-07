@@ -1,30 +1,22 @@
 package net.fuzui.StudentInfo.handler;
 
-import net.fuzui.StudentInfo.pojo.Student;
-import net.fuzui.StudentInfo.pojo.Teacher;
-import net.fuzui.StudentInfo.service.AdminService;
-import net.fuzui.StudentInfo.service.CoursePlanService;
-import net.fuzui.StudentInfo.service.CourseService;
-import net.fuzui.StudentInfo.service.SelectCourseService;
-import net.fuzui.StudentInfo.service.StudentService;
-import net.fuzui.StudentInfo.service.TeacherService;
-import net.fuzui.StudentInfo.service.impl.AdminServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.fuzui.StudentInfo.pojo.Student;
+import net.fuzui.StudentInfo.pojo.Teacher;
+import net.fuzui.StudentInfo.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ProjectName: StudentInfo
@@ -49,13 +41,13 @@ public class AdminHandler {
     @Autowired
 	StudentService studentService;
 	@Autowired
-	TeacherService teacherService;
+    TeacherService teacherService;
 	@Autowired
-	CoursePlanService coursePlanService;
+    CoursePlanService coursePlanService;
 	@Autowired
     CourseService courseService;
 	@Autowired
-	SelectCourseService selectCourseService;
+    SelectCourseService selectCourseService;
 
 
 	/**
@@ -139,15 +131,15 @@ public class AdminHandler {
  		request.setAttribute("slist", studentList);
  	}
 
- 	public void pageIn(Model model,List list) {
+ 	public void pageIn(Model model, List list) {
  		PageInfo page = new PageInfo(list, 5);
 	 	model.addAttribute("pageInfo", page);
  	}
  	
  	// 查询
  	@GetMapping(value = "/query/{pn}")
- 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,HttpServletRequest request,
- 			@PathVariable(value = "pn") String pn,Model model) {
+ 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition, HttpServletRequest request,
+                           @PathVariable(value = "pn") String pn, Model model) {
 
  		int no = Integer.parseInt(pn);
 // 		System.out.println("-----"+no+"----");
@@ -277,7 +269,7 @@ public class AdminHandler {
  	// 跳转页面
  	@RequestMapping("/managestu/{pn}")
  	public String manageStudent(HttpServletRequest request,
- 			@PathVariable(value = "pn") String pn,Model model) {
+                                @PathVariable(value = "pn") String pn, Model model) {
  		int no = Integer.parseInt(pn);
  		
  		PageHelper.startPage(no, 5);
@@ -291,7 +283,7 @@ public class AdminHandler {
  	// 跳转页面
  	@RequestMapping("/managetea/{pn}")
  	public String manageTeacher(HttpServletRequest request,
- 			@PathVariable(value = "pn") String pn,Model model) {
+                                @PathVariable(value = "pn") String pn, Model model) {
  		int no = Integer.parseInt(pn);
  		PageHelper.startPage(no, 5);
  		List<Teacher> teacherList = new ArrayList<Teacher>();
@@ -359,8 +351,8 @@ public class AdminHandler {
  	
  	// 查询
  	@GetMapping(value = "/queryTea/{pn}")
- 	public String redirectTea(@RequestParam("serc") String serc, @RequestParam("condition") String condition,HttpServletRequest request,
- 			@PathVariable(value = "pn") String pn,Model model) {
+ 	public String redirectTea(@RequestParam("serc") String serc, @RequestParam("condition") String condition, HttpServletRequest request,
+                              @PathVariable(value = "pn") String pn, Model model) {
  		int no = Integer.parseInt(pn);
  		PageHelper.startPage(no, 5);
  		List<Teacher> teacherList = new ArrayList<Teacher>();

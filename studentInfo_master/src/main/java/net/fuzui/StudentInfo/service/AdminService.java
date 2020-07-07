@@ -1,7 +1,5 @@
 package net.fuzui.StudentInfo.service;
 
-import org.springframework.stereotype.Service;
-
 /**
  * @ProjectName: StudentInfo
  * @Package: net.fuzui.StudentInfo.service

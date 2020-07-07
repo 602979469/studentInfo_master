@@ -1,17 +1,16 @@
 package net.fuzui.StudentInfo.mysql_rws;
 
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.sql.DataSource;
-
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * @author fuzui
  * @date 2019年3月17日 下午5:32:02
  * 
  */
+
 /**
  * 获取数据源，用于动态切换数据源
  * 实现Spring提供的AbstractRoutingDataSource，只需要实现determineCurrentLookupKey方法即可，
@@ -33,7 +32,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 			throw new IllegalArgumentException("Property writeDataSource is required");
 		}
 		setDefaultTargetDataSource(writeDataSource);
-		Map<Object,Object> targetDataSource = new HashMap<>();
+		Map<Object, Object> targetDataSource = new HashMap<>();
 		targetDataSource.put(DynamicDataSourceGlobal.WRITE.name(), writeDataSource);
 		if(readDataSource != null) {
 			targetDataSource.put(DynamicDataSourceGlobal.READ.name(), readDataSource);

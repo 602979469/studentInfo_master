@@ -1,22 +1,18 @@
 package net.fuzui.StudentInfo.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import net.fuzui.StudentInfo.pojo.Course;
+import net.fuzui.StudentInfo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import net.fuzui.StudentInfo.pojo.Course;
-import net.fuzui.StudentInfo.pojo.Teacher;
-import net.fuzui.StudentInfo.service.CourseService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -51,7 +47,7 @@ public class CourseHandler {
 		}
 	}
 
-	public void pageIn(Model model,List list) {
+	public void pageIn(Model model, List list) {
  		PageInfo page = new PageInfo(list, 5);
 	 	model.addAttribute("pageInfo", page);
  	}
@@ -65,7 +61,7 @@ public class CourseHandler {
 	// 查询课程
 	@GetMapping(value = "/query/{pn}")
 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,
-			HttpServletRequest request,@PathVariable(value = "pn") String pn,Model model) {
+                           HttpServletRequest request, @PathVariable(value = "pn") String pn, Model model) {
 
 		int no = Integer.parseInt(pn);
 		List<Course> courseList = new ArrayList<Course>();
@@ -145,7 +141,7 @@ public class CourseHandler {
 
 	//跳转到queryCourse页面
 	@GetMapping(value = "/finalPage")
-	public String finalPage(HttpSession httpSession,HttpServletRequest request) {
+	public String finalPage(HttpSession httpSession, HttpServletRequest request) {
 		Object admin = request.getSession().getAttribute("courseList");
  		System.out.println(admin+"111111111111111111111111111111111111111111111111111111111111111111111111111");
 		return "admin/queryCourse";
@@ -182,7 +178,7 @@ public class CourseHandler {
 	
 	//跳转到queryCourse页面
 	@RequestMapping("/managecou/{pn}")
-	public String manageCourse(HttpServletRequest request,@PathVariable(value = "pn") String pn,Model model) {
+	public String manageCourse(HttpServletRequest request, @PathVariable(value = "pn") String pn, Model model) {
 		int no = Integer.parseInt(pn);
 		List<Course> courseList = new ArrayList<Course>();
 		PageHelper.startPage(no, 5);

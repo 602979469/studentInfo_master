@@ -1,23 +1,19 @@
 package net.fuzui.StudentInfo.handler;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import net.fuzui.StudentInfo.service.CoursePlanService;
 import net.fuzui.StudentInfo.service.CourseService;
 import net.fuzui.StudentInfo.service.StudentService;
 import net.fuzui.StudentInfo.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author fuzui
@@ -32,9 +28,9 @@ public class AjaxHandler {
 	@Autowired
 	StudentService studentService;
 	@Autowired
-	TeacherService teacherService;
+    TeacherService teacherService;
 	@Autowired
-	CoursePlanService coursePlanService;
+    CoursePlanService coursePlanService;
 	
 	/**
 	 * ajax验证课程编号是否存在
@@ -44,7 +40,7 @@ public class AjaxHandler {
 	 * @throws IOException
 	 */
 	@PostMapping(value="/existCid")
-	public void existCid(@RequestParam("cid") String cid,HttpServletResponse response,HttpServletRequest request) throws IOException{
+	public void existCid(@RequestParam("cid") String cid, HttpServletResponse response, HttpServletRequest request) throws IOException{
 		System.out.println("课程编号="+cid);
  
 		response.setContentType("text/html;charset=UTF-8");
@@ -65,7 +61,7 @@ public class AjaxHandler {
 		
 	}
 	@PostMapping(value="/existSid")
-	public void existSid(@RequestParam("sid") String sid,HttpServletResponse response,HttpServletRequest request) throws IOException{
+	public void existSid(@RequestParam("sid") String sid, HttpServletResponse response, HttpServletRequest request) throws IOException{
 		System.out.println("学号="+sid);
  
 		response.setContentType("text/html;charset=UTF-8");
@@ -86,7 +82,7 @@ public class AjaxHandler {
 	}
 	//ajax验证教师id
 	@PostMapping(value="/existTid")
-	public void existTid(@RequestParam("tid") String tid,HttpServletResponse response,HttpServletRequest request) throws IOException{
+	public void existTid(@RequestParam("tid") String tid, HttpServletResponse response, HttpServletRequest request) throws IOException{
  
 		response.setContentType("text/html;charset=UTF-8");
 		response.setHeader("Cache-Control", "no-cache");
@@ -107,8 +103,8 @@ public class AjaxHandler {
 
 	
 	@PostMapping(value="/existTime")
-	public void existTime(@RequestParam("coursetime") String coursetime,@RequestParam("courseweek") String courseweek,
-			@RequestParam("classroom") String classroom,HttpServletResponse response,HttpServletRequest request) throws IOException{
+	public void existTime(@RequestParam("coursetime") String coursetime, @RequestParam("courseweek") String courseweek,
+                          @RequestParam("classroom") String classroom, HttpServletResponse response, HttpServletRequest request) throws IOException{
  
 		response.setContentType("text/html;charset=UTF-8");
 		response.setHeader("Cache-Control", "no-cache");

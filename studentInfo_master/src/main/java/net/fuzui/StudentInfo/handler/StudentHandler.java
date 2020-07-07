@@ -1,34 +1,23 @@
 package net.fuzui.StudentInfo.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import net.fuzui.StudentInfo.pojo.*;
+import net.fuzui.StudentInfo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import net.fuzui.StudentInfo.pojo.Course;
-import net.fuzui.StudentInfo.pojo.CoursePlan;
-import net.fuzui.StudentInfo.pojo.Grade;
-import net.fuzui.StudentInfo.pojo.StuExitSelect;
-import net.fuzui.StudentInfo.pojo.StuSelectResult;
-import net.fuzui.StudentInfo.pojo.Student;
-import net.fuzui.StudentInfo.pojo.Teacher;
-import net.fuzui.StudentInfo.service.CoursePlanService;
-import net.fuzui.StudentInfo.service.CourseService;
-import net.fuzui.StudentInfo.service.GradeService;
-import net.fuzui.StudentInfo.service.SelectCourseService;
-import net.fuzui.StudentInfo.service.StudentService;
-import net.fuzui.StudentInfo.service.TeacherService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fuzui
@@ -44,13 +33,13 @@ public class StudentHandler {
 	@Autowired
 	TeacherService teacherService;
 	@Autowired
-	CoursePlanService coursePlanService;
+    CoursePlanService coursePlanService;
 	@Autowired
 	CourseService courseService;
 	@Autowired
-	SelectCourseService selectCourseService;
+    SelectCourseService selectCourseService;
 	@Autowired
-	GradeService gradeService;
+    GradeService gradeService;
 
 	// 查询
 	@RequestMapping("/queryvitastu/{sid}")
@@ -87,7 +76,7 @@ public class StudentHandler {
 	// 修改
 	@RequestMapping("/moditypasswordstu/{sid}")
 	public ModelAndView teacherModiPw(@PathVariable(value = "sid") String tid,
-			@RequestParam("spassword") String spassword, Model model) {
+                                      @RequestParam("spassword") String spassword, Model model) {
 		if (studentService.modifyStudentPwd(spassword, tid) != 0) {
 			return new ModelAndView(new RedirectView("../queryvitastu/{sid}"));
 		} else {
@@ -104,7 +93,7 @@ public class StudentHandler {
 	// 查询
 	@GetMapping(value = "/queryy/{pn}")
 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,
-			HttpServletRequest request, @PathVariable(value = "pn") String pn, Model model) {
+                           HttpServletRequest request, @PathVariable(value = "pn") String pn, Model model) {
 		int no = Integer.parseInt(pn);
 		List<Course> courseList = new ArrayList<Course>();
 		PageHelper.startPage(no, 5);
@@ -199,7 +188,7 @@ public class StudentHandler {
 	// 加入课程
 	@RequestMapping("/seling")
 	public String confirmSelect(@RequestParam("cid") String cid, @RequestParam("sid") String sid, Model model,
-			HttpSession httpSession, HttpServletRequest httpRequest) {
+                                HttpSession httpSession, HttpServletRequest httpRequest) {
 		// 判断是否加入过此课程
 		if (selectCourseService.existCourse(cid, sid) != null) {
 			httpRequest.setAttribute("msg", "已经加入过该课程，不能重复加入!");
@@ -239,7 +228,7 @@ public class StudentHandler {
 	// 学生查询本人选课
 	@GetMapping(value = "/selcouresult/{sid}/{pn}")
 	public String selcouresult(@PathVariable("sid") String sid, StuSelectResult ssr, HttpServletRequest request,
-			@PathVariable(value = "pn") String pn, Model model) {
+                               @PathVariable(value = "pn") String pn, Model model) {
 
 		List<StuSelectResult> ssrList = new ArrayList<StuSelectResult>();
 		ssrList = selectCourseService.getSCBySid(1, 10, sid);
@@ -253,7 +242,7 @@ public class StudentHandler {
 	// 所选课程列表详情-----退选
 	@GetMapping(value = "/exitchoose/{sid}/{pn}")
 	public String exitChoose(@PathVariable("sid") String sid, StuSelectResult ssr, HttpServletRequest request,
-			@PathVariable(value = "pn") String pn, Model model) {
+                             @PathVariable(value = "pn") String pn, Model model) {
 
 		List<StuExitSelect> sesList = new ArrayList<StuExitSelect>();
 		sesList = selectCourseService.getExitBysid(1, 10, sid);
@@ -279,7 +268,7 @@ public class StudentHandler {
 	// 学生查询本人选课
 	@GetMapping(value = "/endcourse/{sid}/{pn}")
 	public String endcourse(@PathVariable("sid") String sid, Grade grade, HttpServletRequest request,
-			@PathVariable(value = "pn") String pn, Model model) {
+                            @PathVariable(value = "pn") String pn, Model model) {
 
 		List<Grade> endCourseList = new ArrayList<Grade>();
 		endCourseList = gradeService.getEedCourseBySid(1, 10, sid);

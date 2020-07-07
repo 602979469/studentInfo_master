@@ -1,26 +1,25 @@
 package net.fuzui.StudentInfo.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import net.fuzui.StudentInfo.pojo.Course;
 import net.fuzui.StudentInfo.pojo.CoursePlan;
 import net.fuzui.StudentInfo.service.CoursePlanService;
 import net.fuzui.StudentInfo.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -41,13 +40,13 @@ import net.fuzui.StudentInfo.service.CourseService;
 public class CoursePlanHandler {
 
 	@Autowired
-	CoursePlanService coursePlanService;
+    CoursePlanService coursePlanService;
 	@Autowired
     CourseService courseService;
 
 	//添加课程方案
 	@RequestMapping("/doaddcouplan/{tid}")
-	public ModelAndView addCoursePlan(CoursePlan coursePlan, Model model,HttpSession httpSession,@PathVariable(value="tid") String tid) {
+	public ModelAndView addCoursePlan(CoursePlan coursePlan, Model model, HttpSession httpSession, @PathVariable(value="tid") String tid) {
 
 		if (coursePlanService.insertCoursePlan(coursePlan) != 0) {
 			model.addAttribute("coursePlan", coursePlan);
@@ -78,7 +77,7 @@ public class CoursePlanHandler {
 
 	//跳转
 	@RequestMapping("/addquery/{pn}")
-	public String adStudent(@PathVariable(value = "pn") String pn,Model model,HttpSession httpSession) {
+	public String adStudent(@PathVariable(value = "pn") String pn, Model model, HttpSession httpSession) {
 		int no = Integer.parseInt(pn);
 		List<Course> courseList = new ArrayList<Course>();
 		PageHelper.startPage(no, 5);
@@ -89,7 +88,7 @@ public class CoursePlanHandler {
 	}
 	
 	
-	public void pageIn(Model model,List list) {
+	public void pageIn(Model model, List list) {
  		PageInfo page = new PageInfo(list, 5);
 	 	model.addAttribute("pageInfo", page);
  	}
@@ -97,7 +96,7 @@ public class CoursePlanHandler {
 	//查询所有课程方案
 	@GetMapping(value = "/queryy/{pn}")
 	public String redirect(@RequestParam("serc") String serc, @RequestParam("condition") String condition,
-			Model model, HttpSession httpSession,@PathVariable(value = "pn") String pn,HttpServletRequest request) {
+                           Model model, HttpSession httpSession, @PathVariable(value = "pn") String pn, HttpServletRequest request) {
 
 		int no = Integer.parseInt(pn);
 		List<Course> courseList = new ArrayList<Course>();
@@ -162,7 +161,7 @@ public class CoursePlanHandler {
 	//修改课程方案
 	@RequestMapping("/modicouplan/{courseclass}")
 	public String modiCouPlan(@PathVariable(value = "courseclass") String courseclass, Model model,
-			HttpSession httpSession) {
+                              HttpSession httpSession) {
 		
 		List<CoursePlan> cPlanList = new ArrayList<CoursePlan>();
 
@@ -194,7 +193,7 @@ public class CoursePlanHandler {
 	//删除
 	@RequestMapping("/delcouplan/{courseclass}/{tid}")
 	public ModelAndView modityCouPlan(@PathVariable(value = "courseclass") String courseclass,
-			@PathVariable(value = "tid") String tid, HttpSession httpSession) {
+                                      @PathVariable(value = "tid") String tid, HttpSession httpSession) {
 		
 
 		if (coursePlanService.deleteCoursePlan(courseclass) != 0) {
